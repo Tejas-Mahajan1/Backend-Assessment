@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
@@ -6,7 +7,6 @@ const http = require("http");
 const { Server } = require("socket.io");
 const usersRoute = require("./routes/usersRoute");
 const earningsRoutes = require("./routes/earningsRoutes");
-
 // Initialize MongoDB connection
 connectDB();
 
