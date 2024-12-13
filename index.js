@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
@@ -7,6 +7,8 @@ const http = require("http");
 const { Server } = require("socket.io");
 const usersRoute = require("./routes/usersRoute");
 const earningsRoutes = require("./routes/earningsRoutes");
+const { calculateAndDistributeEarnings } = require("./utils/earningCalculator");
+
 // Initialize MongoDB connection
 connectDB();
 
@@ -32,17 +34,17 @@ app.use("/api", earningsRoutes);
 
 // WebSocket Configuration
 io.on("connection", (socket) => {
-  console.log("A user connected");
+    console.log("A user connected");
 
-  // Handle real-time transaction events
-  socket.on("new-transaction", async ({ userId, transactionAmount }) => {
-    // Calculate and distribute earnings based on MLM structure
-    await calculateAndDistributeEarnings(userId, transactionAmount);
+    // Handle real-time transaction events
+    socket.on("new-transaction", async({ userId, transactionAmount }) => {
+        // Calculate and distribute earnings based on MLM structure
+        await calculateAndDistributeEarnings(userId, transactionAmount);
 
-    // Emit updated earnings to all connected clients
-    const earnings = await Earnings.find({ user: userId });
-    io.emit("earnings-update", earnings);
-  });
+        // Emit updated earnings to all connected clients
+        const earnings = await Earnings.find({ user: userId });
+        io.emit("earnings-update", earnings);
+    });
 });
 
 // Server Configuration
@@ -50,5 +52,5 @@ const PORT = process.env.PORT || 3000;
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
