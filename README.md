@@ -27,26 +27,6 @@ This project is a role-based management admin panel built using the MERN stack (
 - **Frontend**: React.js/Next.js, TypeScript
 - **Deployment**: Vercel, Netlify, or other platforms
 
-## Folder Structure
-
-├── backend/
-│ ├── config/
-│ ├── controllers/
-│ ├── middleware/
-│ ├── models/
-│ ├── routes/
-│ ├── server.ts
-│ └── package.json
-│
-├── frontend/
-│ ├── pages/
-│ ├── components/
-│ ├── context/
-│ ├── utils/
-│ └── package.json
-
-
-
 ## Setup Instructions
 
 ### Backend
